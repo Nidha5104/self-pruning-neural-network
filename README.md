@@ -88,7 +88,6 @@ The L1 norm is chosen because (unlike L2) it creates a **constant gradient** pus
 ├── requirements.txt
 ├── README.md
 ├── report.md         # Technical analysis and results
-└── checkpoints/      # Best model per λ (auto-created)
 ```
 
 ---
