@@ -180,6 +180,7 @@ python train.py --no_cuda
 |--------|------------------|--------------|
 | 1e-5   | 91.56%           | 86.46%       |
 | 1e-4   | 78.63%           | 0.00%        |
+| 5e-4   | 87.81%           | 0.00%        |
 
 👉 Best trade-off observed at **λ = 1e-5**
 
@@ -187,18 +188,25 @@ python train.py --no_cuda
 
 ## 💡 Observations
 
-- The model achieves **high sparsity (86%+)** with minimal accuracy loss at λ = 1e-5  
-- Increasing λ does not always guarantee better pruning due to training dynamics  
+- The model achieves **high sparsity (86%+) with strong accuracy** at λ = 1e-5  
+- Sparsity does not increase consistently with higher λ due to scaling and training dynamics  
 - Gate values tend to become **bimodal (close to 0 or 1)**, indicating clear pruning decisions  
 - Larger layers are pruned more aggressively than smaller ones  
 
 ---
 
-## ⚠️ Note
+## ⚠️ Behaviour at λ = 1e-4 and 5e-4
+
+At λ = 1e-4 and λ = 5e-4, the model did not exhibit measurable sparsity (0%).  
+This suggests that sparsity regularisation was not effectively influencing pruning at these values.
+
+This behaviour indicates that sparsity loss scaling is sensitive and may require normalization or further tuning for consistent pruning performance.
+
+---
+
+## ⚠️ General Note
 
 Results may vary slightly depending on:
 - Random seed  
 - Hardware (CPU vs GPU)  
 - Training duration  
-
-Sparsity behaviour is sensitive to λ scaling and may require tuning for optimal performance.
