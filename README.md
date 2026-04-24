@@ -174,7 +174,7 @@ python train.py --no_cuda
 - CIFAR-10 (auto-downloaded via `torchvision`)
 - CUDA GPU recommended (training ~5–10 min per experiment on a modern GPU)
 
-## 📊 Results (Key Highlights)
+## Results (Key Highlights)
 
 | Lambda | Test Accuracy (%) | Sparsity (%) |
 |--------|------------------|--------------|
@@ -182,11 +182,11 @@ python train.py --no_cuda
 | 1e-4   | 78.63%           | 0.00%        |
 | 5e-4   | 87.81%           | 0.00%        |
 
-👉 Best trade-off observed at **λ = 1e-5**
+Best trade-off observed at **λ = 1e-5**
 
 ---
 
-## 💡 Observations
+## Observations
 
 - The model achieves **high sparsity (86%+) with strong accuracy** at λ = 1e-5  
 - Sparsity does not increase consistently with higher λ due to scaling and training dynamics  
@@ -195,7 +195,7 @@ python train.py --no_cuda
 
 ---
 
-## ⚠️ Behaviour at λ = 1e-4 and 5e-4
+## Behaviour at λ = 1e-4 and 5e-4
 
 At λ = 1e-4 and λ = 5e-4, the model did not exhibit measurable sparsity (0%).  
 This suggests that sparsity regularisation was not effectively influencing pruning at these values.
@@ -204,7 +204,7 @@ This behaviour indicates that sparsity loss scaling is sensitive and may require
 
 ---
 
-## ⚠️ General Note
+## General Note
 
 Results may vary slightly depending on:
 - Random seed  
