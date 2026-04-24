@@ -133,11 +133,8 @@ python train.py --no_cuda
 
 | File | Description |
 |---|---|
-| `checkpoints/best_model_lam{λ}.pt` | Best checkpoint per experiment |
 | `training_curves_lam{λ}.png` | Loss / accuracy / sparsity over epochs |
 | `gate_histogram_lam{λ}.png` | Distribution of gate values post-training |
-| `lambda_tradeoff.png` | Accuracy vs Sparsity across λ (sweep only) |
-| `results.json` | Machine-readable summary of all experiments |
 
 ---
 
@@ -152,18 +149,6 @@ python train.py --no_cuda
 | **OneCycleLR scheduler** | Fast warm-up + cosine annealing improves final accuracy by 1–3% over flat LR |
 | **Label smoothing (0.1)** | Prevents overconfidence, improves calibration and generalisation |
 | **Mixed precision (AMP)** | 2× training speedup on CUDA with minimal accuracy impact |
-
----
-
-## Observations
-
-1. **Sparsity increases monotonically with λ.** The L1 penalty drives more gates below threshold for larger λ, as expected.
-
-2. **Accuracy drops gracefully.** The gap between λ=1e-5 and λ=5e-4 is typically 4–8%, while sparsity jumps from ~15% to ~75%. This confirms the network learns to retain only essential connections.
-
-3. **Gate histogram is bimodal.** After training with any non-trivial λ, the gate distribution shows a large spike near 0 (pruned) and a smaller cluster near 1 (retained). This is the signature of successful pruning.
-
-4. **Layer-wise sparsity varies.** The first `PrunableLinear(8192→1024)` layer tends to prune the most connections, since many of the 8192 input features are redundant. The final classification layer retains more connections.
 
 ---
 
