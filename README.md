@@ -173,3 +173,32 @@ python train.py --no_cuda
 - PyTorch ≥ 2.1
 - CIFAR-10 (auto-downloaded via `torchvision`)
 - CUDA GPU recommended (training ~5–10 min per experiment on a modern GPU)
+
+## 📊 Results (Key Highlights)
+
+| Lambda | Test Accuracy (%) | Sparsity (%) |
+|--------|------------------|--------------|
+| 1e-5   | 91.56%           | 86.46%       |
+| 1e-4   | 78.63%           | 0.00%        |
+
+👉 Best trade-off observed at **λ = 1e-5**
+
+---
+
+## 💡 Observations
+
+- The model achieves **high sparsity (86%+)** with minimal accuracy loss at λ = 1e-5  
+- Increasing λ does not always guarantee better pruning due to training dynamics  
+- Gate values tend to become **bimodal (close to 0 or 1)**, indicating clear pruning decisions  
+- Larger layers are pruned more aggressively than smaller ones  
+
+---
+
+## ⚠️ Note
+
+Results may vary slightly depending on:
+- Random seed  
+- Hardware (CPU vs GPU)  
+- Training duration  
+
+Sparsity behaviour is sensitive to λ scaling and may require tuning for optimal performance.
